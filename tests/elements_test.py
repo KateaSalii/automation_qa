@@ -98,10 +98,10 @@ class TestElements:
             links_page = LinksPage(driver, 'https://demoqa.com/links')
             links_page.open()
             href_link, current_url = links_page.check_new_tab_simple_link()
-            print(href_link, current_url)
+            print(href_link, current_url), "the link is broken or url is incorrect"
 
         def test_broken_link(self, driver):
             links_page = LinksPage(driver, 'https://demoqa.com/links')
             links_page.open()
             response_code = links_page.check_broken_link('https://demoqa.com/bad-request')
-            assert response_code == 400
+            assert response_code == 400, "the link works or the status code is son 400"
