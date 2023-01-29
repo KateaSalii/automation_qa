@@ -3,7 +3,8 @@ import random
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, WebTablePageLocators
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
+    WebTablePageLocators, ButtonsPageLocators
 
 from pages.base_page import BasePage
 
@@ -59,6 +60,7 @@ class CheckBoxPage(BasePage):
             title_item = box.find_element_by_xpath(self.locators.TITLE_ITEM)
             data.append(title_item.text)
         return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
+
     def get_output_result(self):
         result_list = self.elements_are_visible(self.locators.OUTPUT_RESULT)
         data = []
@@ -66,20 +68,24 @@ class CheckBoxPage(BasePage):
             data.append(item.text)
         return str(data).replace(' ', '').lower()
 
-class RadioButtonPage(BasePage):
 
+class RadioButtonPage(BasePage):
     locators = RadioButtonPageLocators()
+
     def click_on_the_radio_button(self, choice):
         choices = {'yes': self.locators.YES_RADIOBUTTON,
-                 'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
-                 'no': self.locators.NO_RADIOBUTTON}
+                   'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
+                   'no': self.locators.NO_RADIOBUTTON}
 
         self.element_is_visible(choices[choice]).click()
+
     def get_output_result(self):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
 
+
 class WebTablePage(BasePage):
     locators = WebTablePageLocators()
+
     def add_new_person(self):
         count = 1
         while count != 0:
@@ -98,8 +104,9 @@ class WebTablePage(BasePage):
             self.element_is_visible(self.locators.SALARY_INPUT).send_keys(salary)
             self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
             self.element_is_visible(self.locators.SUBMIT).click()
-            count-=1
+            count -= 1
             return [firstname, lastname, str(age), email, str(salary), department]
+
     def check_new_added_person(self):
         people_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
         data = []
@@ -134,7 +141,7 @@ class WebTablePage(BasePage):
         count = [5, 10, 20, 25, 50, 100]
         data = []
         for x in count:
-            count_row_button = self.element_is_visible(self.locators.COUNT_ROW_LIST
+            count_row_button = self.element_is_visible(self.locators.COUNT_ROW_LIST)
             self.go_to_element(count_row_button)
             count_row_button.click()
             self.element_is_visible(By.CSS_SELECTOR, f'option[value="{x}"]').click()
@@ -146,10 +153,19 @@ class WebTablePage(BasePage):
         return len(list_rows)
 
 
+class ButtonsPage(BasePage):
+    locators = ButtonsPageLocators()
 
+    def click_on_different_button(self, type_click):
+        if type_click == "double":
+            self.action_double_click(self.element_is_visible(self.locators.DOUBLE_BUTTON))
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_DOUBLE)
+        if type_click == "right":
+            self.action_right_click(self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON))
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_RIGHT)
+        if type_click == "click":
+            self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_CLICK_ME)
 
-
-
-
-
-
+    def check_clicked_on_the_button(self, element):
+        return self.element_is_present(element).text
