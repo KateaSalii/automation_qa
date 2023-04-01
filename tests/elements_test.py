@@ -110,8 +110,13 @@ class TestElements:
         def test_upload_file(self, driver):
             upload_download_page = UploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
             upload_download_page.open()
-            upload_download_page.upload_file()
+            file_name,result = upload_download_page.upload_file()
+            assert file_name == result, "the file has not been uploaded"
+
 
         def test_download_file(self, driver):
-            links_page = UploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
-            links_page.open()
+            upload_download_page = UploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
+            upload_download_page.open()
+            check = upload_download_page.download_file()
+            assert check is True,"the file has not been downloaded"
+
