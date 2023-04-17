@@ -42,4 +42,9 @@ class BasePage:
         action.context_click(element)
         action.perform()
 
+    def remove_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script("document.getElementById('fixedban').style.display='none'")
+
+
 
