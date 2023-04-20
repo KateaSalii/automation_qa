@@ -4,7 +4,7 @@ from pages.widgets_page import AccordianPage
 class TestWidgets:
     class TestAccordianPage:
 
-        def test_accordian(self,driver):
+        def test_accordian(self, driver):
             accordian_page = AccordianPage(driver, 'https://demoqa.com/accordian')
             accordian_page.open()
             first_title, first_content = accordian_page.check_accordian('first')
