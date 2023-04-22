@@ -3,7 +3,7 @@ import time
 
 from pages.base_page import BasePage
 from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
-    FramesPageLocators, NestedFramesPageLocators
+    FramesPageLocators, NestedFramesPageLocators, ModalDialogsPageLocators
 
 
 class BrowserWindowsPage(BasePage):
@@ -73,6 +73,7 @@ class FramesPage(BasePage):
             text = self.element_is_present(self.locators.TITLE_FRAME).text
             return [text, width, height]
 
+
 class NestedFramesPage(BasePage):
     locators = NestedFramesPageLocators()
 
@@ -85,3 +86,17 @@ class NestedFramesPage(BasePage):
         child_text = self.element_is_present(self.locators.CHILD_FRAME_TEXT).text
         return parent_text, child_text
 
+
+class ModalDialogsPage(BasePage):
+    locators = ModalDialogsPageLocators()
+
+    def check_modal_dialogs(self):
+        self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+        title_small = self.element_is_visible(self.locators.SMALL_MODAL_TITLE).text
+        body_small_text = self.element_is_visible(self.locators.SMALL_MODAL_BODY).text
+        self.element_is_visible(self.locators.SMALL_MODAL_CLOSE_BUTTON).click()
+        self.element_is_visible(self.locators.LARGE_MODAL_BUTTON).click()
+        title_large = self.element_is_visible(self.locators.LARGE_MODAL_TITLE).text
+        body_large_text = self.element_is_visible(self.locators.LARGE_MODAL_BODY).text
+        self.element_is_visible(self.locators.LARGE_MODAL_CLOSE_BUTTON).click()
+        return [title_small, len(body_small_text)], [title_large, len(body_large_text)]
