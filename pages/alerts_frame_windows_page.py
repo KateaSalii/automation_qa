@@ -2,7 +2,8 @@ import random
 import time
 
 from pages.base_page import BasePage
-from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators
+from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
+    FramesPageLocators
 
 
 class BrowserWindowsPage(BasePage):
@@ -43,10 +44,31 @@ class AlertsPage(BasePage):
         return text_result
 
     def check_prompt_box(self):
-        text = f"autotest{random.randint(0,999)}"
+        text = f"autotest{random.randint(0, 999)}"
         self.element_is_visible(self.locators.PROMPT_BUTTON).click()
         alert_window = self.driver.switch_to.alert
         alert_window.send_keys(text)
         alert_window.accept()
         text_result = self.element_is_present(self.locators.PROMPT_RESULT).text
-        return text,text_result
+        return text, text_result
+
+
+class FramesPage(BasePage):
+    locators = FramesPageLocators()
+
+    def check_frame(self, frame_num):
+        if frame_num == 'frame1':
+            frame = self.element_is_present(self.locators.FIRST_FRAME)
+            width = frame.get_attribute('width')
+            height = frame.get_attribute('height')
+            self.driver.switch_to.frame(frame)
+            text = self.element_is_present(self.locators.TITLE_FRAME).text
+            self.driver.switch_to.default_content()
+            return [text, width, height]
+        if frame_num == 'frame2':
+            frame = self.element_is_present(self.locators.SECOND_FRAME)
+            width = frame.get_attribute('width')
+            height = frame.get_attribute('height')
+            self.driver.switch_to.frame(frame)
+            text = self.element_is_present(self.locators.TITLE_FRAME).text
+            return [text, width, height]
