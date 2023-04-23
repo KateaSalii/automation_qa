@@ -8,3 +8,11 @@ class AccordianPageLocators:
     SECTION_CONTENT_SECOND = (By.CSS_SELECTOR, 'div[id="section2Content"] p')
     SECTION_THIRD = (By.CSS_SELECTOR, 'div[id="section3Heading"]')
     SECTION_CONTENT_THIRD = (By.CSS_SELECTOR, 'div[id="section3Content"] p')
+
+
+class AutoCompletePageLocators:
+    MULTIPLE_INPUT = (By.CSS_SELECTOR, 'input[id="autoCompleteMultipleInput"]')
+    MULTIPLE_VALUE = (By.CSS_SELECTOR, 'div[class="css-1rhbuit-multiValue auto-complete__multi-value"]')
+    MULTIPLE_VALUE_DELETE = (By.CSS_SELECTOR, 'div[class="css-1rhbuit-multiValue auto-complete__multi-value"] svg path')
+    SINGLE_INPUT = (By.CSS_SELECTOR, 'input[id="autoCompleteSingleInput"]')
+    SINGLE_VALUE = (By.CSS_SELECTOR, 'div[class="auto-complete__single-value css-1uccc91-singleValue"]')
