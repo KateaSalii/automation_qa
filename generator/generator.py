@@ -1,9 +1,10 @@
 import random
 
-from data.data import Person, Color
+from data.data import Person, Color, Date
 from faker import Faker
 
 faker_ru = Faker('ru_RU')
+fake_en = Faker('EN')
 Faker.seed()
 
 
@@ -35,10 +36,18 @@ def generated_subject():
         subjects=["Hindi", "English", "Maths", "Physics", "Chemistry", "Biology", "Computer Science", "Commerce",
                   "Accounting", "Economics", "Arts", "Social Studies", "History", "Civics"]
     )
-    #print(random.choice(subjects))
 
 
 def generated_color():
     yield Color(
         color_name=["Aqua", "Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo"]
+    )
+
+
+def generated_date():
+    yield Date(
+        year=fake_en.year(),
+        month=fake_en.month_name(),
+        day=fake_en.day_of_month(),
+        time="12:00",
     )
