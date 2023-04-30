@@ -40,3 +40,12 @@ class SliderPageLocators:
 class ProgressBarLocators:
     PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, 'button[id="startStopButton"]')
     PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
+
+
+class TabsLocators:
+    WHAT_LINK = (By.CSS_SELECTOR, 'a[id="demo-tab-what"]')
+    WHAT_LINK_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-what"] p')
+    ORIGIN_LINK = (By.CSS_SELECTOR, 'a[id="demo-tab-origin"]')
+    ORIGIN_LINK_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-origin"]')
+    USE_LINK = (By.CSS_SELECTOR, 'a[id="demo-tab-use"]')
+    USE_LINK_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"] p')

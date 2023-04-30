@@ -7,7 +7,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarLocators
+    SliderPageLocators, ProgressBarLocators, TabsLocators
 from pages.base_page import BasePage
 
 
@@ -137,3 +137,28 @@ class ProgressBarPage(BasePage):
         progress_bar_input.click()
         value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
         return value_before, value_after
+
+
+class TabsPage(BasePage):
+    locators = TabsLocators()
+
+    def check_tabs(self, tabs_num):
+        tabs = {'what':
+                    {'title': self.locators.WHAT_LINK,
+                     'content': self.locators.WHAT_LINK_CONTENT},
+
+                'origin':
+                    {'title': self.locators.ORIGIN_LINK,
+                     'content': self.locators.ORIGIN_LINK_CONTENT},
+                'use':
+                    {'title': self.locators.USE_LINK,
+                     'content': self.locators.USE_LINK_CONTENT},
+                }
+        section_title = self.element_is_clickable(tabs[tabs_num]['title'])
+        section_title.click()
+        try:
+            section_content = self.element_is_clickable(tabs[tabs_num]['content']).text
+        except TimeoutException:
+            section_title.click()
+            section_content = self.element_is_clickable(tabs[tabs_num]['content']).text
+        return [section_title.text, len(section_content)]
