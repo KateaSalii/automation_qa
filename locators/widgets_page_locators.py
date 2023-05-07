@@ -65,3 +65,13 @@ class ToolTipsLocators:
 
 class MenuLocators:
     MENU_ITEM_LiST = (By.CSS_SELECTOR, 'ul[id="nav"] li a')
+
+#class SelectMenuLocators:
+ #   SELECT_OPTION = (By.CSS_SELECTOR, 'div[id="withOptGroup"]')
+  #  OPTION_INPUT = (By.CSS_SELECTOR, 'input[id="react-select-5-input"]')
+
+   # SELECT_TITLE = (By.CSS_SELECTOR, 'div[id="selectOne"]')
+   # TITLE_INPUT = (By.CSS_SELECTOR, 'input[id="react-select-6-input"]')
+
+
+  #  OLD_SELECT_MENU = (By.CSS_SELECTOR, 'select[id="oldSelectMenu"]')

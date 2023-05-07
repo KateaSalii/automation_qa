@@ -198,3 +198,12 @@ class MenuPage(BasePage):
         return data
 
 
+#class SelectMenuPage(BasePage):
+#    locators = SelectMenuLocators()
+
+ #   def check_select_menu(self):
+#        self.element_is_visible(self.locators.SELECT_OPTION).click()
+ #       self.element_is_visible(self.locators.OPTION_INPUT).send_keys(Keys.RETURN)
+ #       self.element_is_visible(self.locators.SELECT_TITLE).click()
+ #       self.element_is_visible(self.locators.TITLE_INPUT).send_keys(Keys.RETURN)
+
